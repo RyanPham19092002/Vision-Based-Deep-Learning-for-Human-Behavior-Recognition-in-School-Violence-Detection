@@ -224,7 +224,7 @@ If you are using our code, please consider citing our paper.
   year={2023}
 }
 
-@article{yang2023yowov2,
+@article{
   title={Utilizing Deep Learning Models to Develop a Human Behavior Recognition System for VisionBased School Violence Detection},
   author={Thanh Phat Pham, Huy Hieu Vu, Tan Trinh Nguyen, Son Phuc Phan, and Viet Cuong Pham},
   year={2024}
