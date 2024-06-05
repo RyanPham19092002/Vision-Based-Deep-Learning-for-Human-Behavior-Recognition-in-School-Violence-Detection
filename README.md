@@ -1,12 +1,12 @@
 # Vision-Based Deep Learning for Human Behavior Recognition in School Violence Detection based on YOWOv2
-# YOWOv2: A Stronger yet Efficient Multi-level Detection Framework for Real-time Spatio-temporal Action Detection
+## YOWOv2: A Stronger yet Efficient Multi-level Detection Framework for Real-time Spatio-temporal Action Detection
 English | [简体中文](https://github.com/yjh0410/YOWOv2/blob/master/README_CN.md)
 
-## Overview of YOWOv2
+### Overview of YOWOv2
 ![image](./img_files/yowov2.png)
 
 
-## Requirements
+### Requirements
 - We recommend you to use Anaconda to create a conda environment:
 ```Shell
 conda create -n yowo python=3.6
@@ -22,7 +22,7 @@ conda activate yowo
 pip install -r requirements.txt 
 ```
 
-## Visualization
+### Visualization
 
 ![image](./img_files/ucf24_v_Basketball_g07_c04.gif)
 ![image](./img_files/ucf24_v_Biking_g01_c01.gif)
@@ -32,9 +32,14 @@ pip install -r requirements.txt
 ![image](./img_files/ucf24_v_IceDancing_g02_c05.gif)
 ![image](./img_files/ucf24_v_SalsaSpin_g03_c01.gif)
 
-# Dataset
+## Dataset
 
-## UCF101-24:
+### Data violence behaviour in school environments
+
+Training and validation : https://drive.google.com/drive/folders/1-2Sjv0eNIwC8eCxxqob_z7mbS8mUTZXw?usp=sharing
+Testing : https://drive.google.com/drive/folders/1HlimAXW3CdBZnuIMxnJrGWIUg9TK-Fio?usp=sharing
+
+### UCF101-24:
 You can download **UCF24** from the following links:
 
 * Google drive
@@ -47,10 +52,10 @@ Link: https://pan.baidu.com/s/11GZvbV0oAzBhNDVKXsVGKg
 
 Password: hmu6 
 
-## AVA
+### AVA
 You can use instructions from [here](https://github.com/yjh0410/AVA_Dataset) to prepare **AVA** dataset.
 
-# Experiment
+## Experiment
 * UCF101-24
 
 |      Model     |  Clip  | GFLOPs |  Params | F-mAP | V-mAP |   FPS   |    Weight    |
@@ -87,7 +92,7 @@ You can use instructions from [here](https://github.com/yjh0410/AVA_Dataset) to 
 ![image](./img_files/vis_ava.png)
 
 
-## Train YOWOv2
+### Train YOWOv2
 * UCF101-24
 
 For example:
@@ -121,7 +126,7 @@ python train.py --cuda -dist -d ava_v2.2 --root path/to/dataset -v yowo_v2_nano 
 
 *However, I have not multiple GPUs, so I am not sure if there are any bugs, or if the given performance can be reproduced using DDP.*
 
-##  Test YOWOv2
+###  Test YOWOv2
 * UCF101-24
 For example:
 
@@ -136,7 +141,7 @@ For example:
 python test.py --cuda -d ava_v2.2 -v yowo_v2_nano --weight path/to/weight -size 224 --show
 ```
 
-##  Test YOWOv2 on AVA video
+###  Test YOWOv2 on AVA video
 For example:
 
 ```Shell
@@ -145,7 +150,7 @@ python test_video_ava.py --cuda -d ava_v2.2 -v yowo_v2_nano --weight path/to/wei
 
 Note that you can set ```path/to/video``` to other videos in your local device, not AVA videos.
 
-## Evaluate YOWOv2
+### Evaluate YOWOv2
 * UCF101-24
 For example:
 
@@ -186,7 +191,7 @@ python eval.py \
         --weight path/to/weight
 ```
 
-## Demo
+### Demo
 ```Shell
 # run demo
 python demo.py --cuda -d ucf24 -v yowo_v2_nano -size 224 --weight path/to/weight --video path/to/video --show
@@ -197,20 +202,20 @@ python demo.py --cuda -d ucf24 -v yowo_v2_nano -size 224 --weight path/to/weight
 ![image](./img_files/vis_demo.png)
 
 
-## Alert 
+### Alert 
 When frame has object , which class "bully", this frame has 1 point. Otherwise , this frame has 0 point.
 With 16 continuous frame, we have a list points of 16 frame, then we fit it to the pretrained ANN to predict the output has target 1 (corresponding on bullying behaviour), or 0 (corresponding on not bullying behaviour).
 
-## Web App 
+### Web App 
 Using Django for system multi-cam.
 
 
-## Demo
+### Demo
 Link Drive : https://drive.google.com/file/d/12mCQVTvjSdURxttv_2uezwtH-QemvgOB/view?usp=drive_link
 
 
 
-## References
+### References
 If you are using our code, please consider citing our paper.
 
 ```
@@ -219,6 +224,12 @@ If you are using our code, please consider citing our paper.
   author={Yang, Jianhua and Kun, Dai},
   journal={arXiv preprint arXiv:2302.06848},
   year={2023}
+}
+
+@article{yang2023yowov2,
+  title={Utilizing Deep Learning Models to Develop a Human Behavior Recognition System for VisionBased School Violence Detection},
+  author={Thanh Phat Pham, Huy Hieu Vu, Tan Trinh Nguyen, Son Phuc Phan, and Viet Cuong Pham},
+  year={2024}
 }
 ```
 
