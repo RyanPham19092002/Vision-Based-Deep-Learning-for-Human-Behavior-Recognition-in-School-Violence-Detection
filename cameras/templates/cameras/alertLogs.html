@@ -1,0 +1,139 @@
+{% extends "SVDSystem/base.html" %} {% block title%}
+<title>Add Cameras</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  .long-text {
+    display: inline-block;
+    max-width: 200px; /* Adjust the max-width as needed */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+</style>
+{%endblock%} {% block navcontent%}
+<li class="nav-item active">
+  <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+</li>
+{%endblock%} {% block navcontentleft%}
+<li class="nav-item active">
+  <a class="nav-link" aria-current="page" href="/">Home</a>
+</li>
+<li class="nav-item active">
+  <a class="nav-link" aria-current="page" href="{% url 'cameras' %}">Cameras</a>
+</li>
+{%endblock%} {% block content%}
+<div class="row">
+  <div class="col-md">
+    <div class="card card-body">
+      <h5>Logs</h5>
+    </div>
+    <div class="card card-body">
+      <div class="table-responsive">
+        <table class="table" id="log-list">
+          <thead>
+            <tr>
+              <th>Camera</th>
+              <th>Action</th>
+              <th>Time</th>
+              <th>Clip link</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in page_obj %}
+            <tr>
+              <td>{{ i.camera_number }}</td>
+              <td>{{ i.alert }}</td>
+              <td>{{ i.time }}</td>
+              <td class="long-text">{{ i.clip_link }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      
+
+      <div id="pagination-controls">
+        <button id="prev-page" disabled>Previous</button>
+        <span id="page-info">Page 1</span>
+        <button id="next-page">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<script>
+  var currentPage = 1;
+  function formatTimestamp(isoString) {
+    var date = new Date(isoString);
+    return date.toLocaleString(); // Adjust options for more specific formatting
+  }
+  // Function to fetch logs from the server and update the table
+  function fetchLogs(page) {
+    $.ajax({
+      url: '{% url "get_alert_logs" %}',
+      method: "GET",
+      data: { page: page },
+      success: function (data) {
+        var logs = data.logs;
+        var logList = $("#log-list tbody");
+        // Clear all rows
+        logList.empty();
+        for (var i = 0; i < logs.length; i++) {
+          var log = logs[i];
+          var newRow =
+            "<tr>" +
+            "<td>" +
+            log.camera_number +
+            "</td>" +
+            "<td>" +
+            log.alert +
+            "</td>" +
+            "<td>" +
+            formatTimestamp(log.time) +
+            "</td>" +
+            "<td>" +
+            log.clip_link +
+            "</td>" +
+            "</tr>";
+          logList.append(newRow); // Append new rows at the bottom
+        }
+
+        // Update pagination controls
+        $("#page-info").text(
+          "Page " + data.page_number + " of " + data.total_pages
+        );
+        $("#prev-page").prop("disabled", !data.has_previous);
+        $("#next-page").prop("disabled", !data.has_next);
+        currentPage = data.page_number;
+      },
+    });
+  }
+
+  // Fetch logs initially
+  fetchLogs(currentPage);
+
+  // Set interval to fetch logs every 5 seconds
+  setInterval(function () {
+    fetchLogs(currentPage);
+  }, 5000);
+
+  // Pagination controls
+  $("#prev-page").click(function () {
+    if (currentPage > 1) {
+      fetchLogs(currentPage - 1);
+    }
+  });
+
+  $("#next-page").click(function () {
+    fetchLogs(currentPage + 1);
+  });
+</script>
+
+{%endblock%}
