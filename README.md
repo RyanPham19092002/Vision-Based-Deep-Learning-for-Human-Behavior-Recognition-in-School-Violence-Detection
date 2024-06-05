@@ -208,7 +208,7 @@ With 16 continuous frame, we have a list points of 16 frame, then we fit it to t
 Using Django for system multi-cam.
 
 
-### Demo
+### Demo video (run test_video_ava.py)
 Link Drive : https://drive.google.com/file/d/12mCQVTvjSdURxttv_2uezwtH-QemvgOB/view?usp=drive_link
 
 
