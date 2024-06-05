@@ -196,6 +196,12 @@ python demo.py --cuda -d ucf24 -v yowo_v2_nano -size 224 --weight path/to/weight
 ![image](./img_files/vis_demo.png)
 
 
+## Alert 
+When frame has object , which class "bully", this frame has 1 point. Otherwise , this frame has 0 point.
+With 16 continuous frame, we have a list points of 16 frame, then we fit it to the pretrained ANN to predict the output has target 1 (corresponding on bullying behaviour), or 0 (corresponding on not bullying behaviour).
+
+
+
 ## References
 If you are using our code, please consider citing our paper.
 
@@ -207,3 +213,5 @@ If you are using our code, please consider citing our paper.
   year={2023}
 }
 ```
+
+
