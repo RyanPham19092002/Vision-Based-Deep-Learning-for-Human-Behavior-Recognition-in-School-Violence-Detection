@@ -199,9 +199,6 @@ python demo.py --cuda -d ucf24 -v yowo_v2_nano -size 224 --weight path/to/weight
                       -d ava_v2.2
 ```
 
-**Qualitative results in real scenarios**
-![image](./img_files/vis_demo.png)
-
 
 ### Alert 
 When frame has object , which class "bully", this frame has 1 point. Otherwise , this frame has 0 point.
